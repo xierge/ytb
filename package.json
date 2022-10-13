@@ -1,0 +1,57 @@
+{
+  "name": "youtube",
+  "version": "1.0.0",
+  "description": "demo",
+  "private": true,
+  "egg": {
+    "declarations": true
+  },
+  "dependencies": {
+    "@alicloud/pop-core": "^1.7.12",
+    "egg": "^2",
+    "egg-cors": "^2.2.3",
+    "egg-jwt": "^3.1.7",
+    "egg-mongoose": "^3.3.1",
+    "egg-redis": "^2.4.0",
+    "egg-scripts": "^2",
+    "egg-swagger-doc": "^2.3.2",
+    "egg-validate": "^2.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "autod": "^3",
+    "autod-egg": "^1",
+    "egg-bin": "^4",
+    "egg-ci": "^2",
+    "egg-mock": "^4",
+    "eslint": "^8",
+    "eslint-config-egg": "^12"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "scripts": {
+    "start": "egg-scripts start --daemon --title=egg-server-youtube",
+    "stop": "egg-scripts stop --title=egg-server-youtube",
+    "dev": "egg-bin dev",
+    "prod": "egg-scripts start --env=prod --accessKeyId=LTAI5tKG5RcprBuQyQJMBRRH --accessKeySecret=7Fg0U768Oo4pTKdWdhOLbYJY7bzgIr",
+    "debug": "egg-bin debug",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod"
+  },
+  "ci": {
+    "version": "16",
+    "type": "github"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "lx",
+  "license": "MIT"
+}

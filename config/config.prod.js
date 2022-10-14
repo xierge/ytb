@@ -8,7 +8,7 @@ exports.redis = {
   client: {
     port: 6375, // Redis port
     host: '47.98.217.142', // Redis host
-    password: 'auth',
+    password: 'lpx666888',
     db: 0,
   },
 };

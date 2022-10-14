@@ -6,7 +6,7 @@ exports.vod = {
 
 exports.redis = {
   client: {
-    port: 6379, // Redis port
+    port: 6375, // Redis port
     host: '47.98.217.142', // Redis host
     password: 'auth',
     db: 0,

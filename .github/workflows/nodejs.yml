@@ -36,6 +36,6 @@ jobs:
           [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
           cd /usr/local/ytb/lx_ytb
           git pull  
-          yarn add
+          yarn
           npm run stop
           npm run start

@@ -35,7 +35,6 @@
     "start": "egg-scripts start --daemon --title=egg-server-youtube",
     "stop": "egg-scripts stop --title=egg-server-youtube",
     "dev": "egg-bin dev",
-    "prod": "egg-scripts start --env=prod --accessKeyId=LTAI5tKG5RcprBuQyQJMBRRH --accessKeySecret=7Fg0U768Oo4pTKdWdhOLbYJY7bzgIr",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",

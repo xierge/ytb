@@ -73,4 +73,12 @@ module.exports = app => {
   router.post('/ytb/v1/like/dislike', mustLogin, controller.like.dislike);
   // 喜欢的视频列表
   router.get('/ytb/v1/like', mustLogin, controller.like.getList);
+
+  // -----------------------todoList-----------------------------
+  // 新增或修改数据
+  router.post('/ytb/v1/todo', mustLogin, controller.todo.create);
+  // 更改状态
+  router.post('/ytb/v1/todo/changeStatus', mustLogin, controller.todo.changeStatus);
+  // 查看数据
+  router.get('/ytb/v1/todo', mustLogin, controller.todo.getList);
 };

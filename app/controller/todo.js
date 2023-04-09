@@ -7,131 +7,92 @@ const BaseController = require('./base');
  * @Controller Todo 每日计划安排
  */
 class TodoController extends BaseController {
+  get todoService() {
+    return this.ctx.service.todo;
+  }
+
   /**
    * @summary 新增计划
    * @description 新增计划
-   * @Router POST /ytb/v1/todo
+   * @Router POST /v1/todo
    * @Request header string authorization token
    * @Request body CreateTodo 参数
    */
   async create() {
     const body = this.ctx.request.body;
     const { userId } = this.ctx.userInfo;
-    const { Like, Video } = this.app.model;
     this.ctx.validate({
-      dtime: {
-        required: true,
-      },
       title: {
         require: true,
+        type: 'string',
+      },
+      dtime: {
+        require: true,
+        type: 'number',
       },
     }, body);
-
-    const like = await Like.findOne({
-      user: userId,
-      video: body.video,
-    });
-
-    let video = await Video.findById(body.video).populate('user');
-    let liked = true;
-    if (!like) {
-      await new Like({ ...body, user: userId }).save();
-      video.likedCount++;
-    } else if (like.like !== 1) {
-      like.like = body.like;
-      await like.save();
-      video.likedCount++;
-      video.dislikedCount--;
-    } else {
-      await like.remove();
-      video.likedCount--;
-      liked = false;
-    }
-    await video.save();
-    video = video.toJSON();
-
-    this.setRes({ ...video, liked });
+    const res = await this.todoService.create({ ...body, userId, status: 0 });
+    this.setRes(res);
   }
 
   /**
-   * @summary 视频不喜欢
-   * @description 视频不喜欢
-   * @Router POST /v1/like/dislike
+   * @summary 更改状态
+   * @description 更改状态
+   * @Request path string id 当前数据id
+   * @Router PUT /v1/todo/changeStatus/{id}
    * @Request header string authorization token
-   * @Request body like 参数
+   * @Request body CreateTodo 参数
    */
   async changeStatus() {
     const body = this.ctx.request.body;
+    const { id } = this.ctx.params;
     const { userId } = this.ctx.userInfo;
-    const { Like, Video } = this.app.model;
-    this.ctx.validate({
-      video: {
-        type: 'string',
-      },
-    }, body);
-    body.like = -1;
+    let todo = await this.todoService.findById(id);
+    if (!todo) this.ctx.throw(422, '无此数据');
 
-
-    const like = await Like.findOne({
-      user: userId,
-      video: body.video,
-    });
-
-    let video = await Video.findById(body.video).populate('user');
-    let disliked = true;
-    if (!like) {
-      await new Like({ ...body, user: userId }).save();
-      video.dislikedCount++;
-    } else if (like.like !== body.like) {
-      like.like = body.like;
-      await like.save();
-      video.likedCount--;
-      video.dislikedCount++;
-    } else {
-      disliked = false;
-      await like.remove();
-      video.dislikedCount--;
+    if (todo.userId.toString() === userId) {
+      return this.ctx.throw(422, '不能修改非本人的数据');
     }
 
-    await video.save();
-    video = video.toJSON();
-    this.setRes({ ...video, disliked });
+    todo = Object.assign(todo, { status: body.status === 0 ? 1 : 0 });
+
+    await todo.save();
+    this.setRes();
   }
 
   /**
-   * @summary 获取喜欢列表
-   * @description 获取喜欢列表
-   * @Router GET /v1/like/like
+   * @summary 查看数据
+   * @description 查看数据
+   * @Router GET /v1/todo
    * @Request header string authorization token
    */
   async getList() {
     const { userId } = this.ctx.userInfo;
-    const { Like, Video } = this.app.model;
+    const pageInfo = {
+      pageSize: 10, pageNum: 1,
+    };
+    const res = await this.todoService.getList({ ...pageInfo, ...this.ctx.query, userId });
+    this.setRes(res);
+  }
 
-    const { pageSize = 10, pageNum = 1 } = this.ctx.query;
-    const getLikes = await Like.find({
-      user: userId,
-      like: 1,
-    }).populate('user')
-      .sort({
-        createdAt: -1,
-      })
-      .skip(pageNum - 1)
-      .limit(pageSize * 1);
 
-    const getList = Video.find({
-      _id: {
-        $in: getLikes.map(item => item.video),
-      },
-    }).populate('user');
-    const getCount = Like.countDocuments({
-      user: userId,
-      like: 1,
-    });
-
-    const [ list, count ] = await Promise.all([ getList, getCount ]);
-    this.setRes({ list, count });
-
+  /**
+   * @summary 删除计划
+   * @description 删除计划
+   * @Request path string id 当前数据id
+   * @Router DELETE /v1/todo/{id}
+   * @Request header string authorization token
+   */
+  async delete() {
+    const { userId } = this.ctx.userInfo;
+    const { id } = this.ctx.params;
+    const todo = await this.todoService.findById(id);
+    if (!todo) this.ctx.throw(422, '无此数据');
+    if (todo.userId.toString() !== userId) {
+      return this.ctx.throw(422, '不能删除非本人的数据');
+    }
+    await this.todoService.delete(id);
+    this.setRes();
   }
 }
 

@@ -75,10 +75,12 @@ module.exports = app => {
   router.get('/ytb/v1/like', mustLogin, controller.like.getList);
 
   // -----------------------todoList-----------------------------
-  // 新增或修改数据
+  // 新增或修改计划
   router.post('/ytb/v1/todo', mustLogin, controller.todo.create);
   // 更改状态
-  router.post('/ytb/v1/todo/changeStatus', mustLogin, controller.todo.changeStatus);
+  router.put('/ytb/v1/todo/changeStatus/:id', mustLogin, controller.todo.changeStatus);
   // 查看数据
   router.get('/ytb/v1/todo', mustLogin, controller.todo.getList);
+  // 删除计划
+  router.delete('/ytb/v1/todo/:id', mustLogin, controller.todo.delete);
 };

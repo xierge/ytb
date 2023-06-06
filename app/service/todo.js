@@ -1,3 +1,10 @@
+/*
+ * @Date: 2023-04-09 15:33:21
+ * @LastEditors: 李鹏玺 2899952565@qq.com
+ * @LastEditTime: 2023-06-06 22:55:54
+ * @FilePath: /lx_ytb/app/service/todo.js
+ * @description: 
+ */
 const Service = require('egg').Controller;
 
 class TodoService extends Service {
@@ -16,7 +23,7 @@ class TodoService extends Service {
       .sort({
         createdAt: -1,
       })
-      .skip(pageNum - 1)
+      .skip((pageNum - 1) * pageSize)
       .limit(pageSize * 1);
 
     const getCount = this.Todo.countDocuments(query);

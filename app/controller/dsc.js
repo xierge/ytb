@@ -2,6 +2,7 @@
 'use strict';
 
 const BaseController = require('./base');
+const qs = require('qs');
 
 /**
  * @Controller DSC 大商创接口透传
@@ -25,8 +26,9 @@ class DSCController extends BaseController {
    * @Router GET /v1/dsc
    */
   async get() {
-    const { url } = this.ctx.query;
-    const res = await this.ctx.curl(url, {
+    const { url, ...keys } = this.ctx.query;
+    const parmas = '?' + qs.stringify(keys);
+    const res = await this.ctx.curl(url + parmas, {
       dataType: 'json',
     });
     this.setRes(res.data.data);

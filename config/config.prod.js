@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-03-07 22:17:47
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2023-08-17 01:47:14
+ * @LastEditTime: 2023-08-17 02:58:14
  * @FilePath: /lx_ytb/config/config.prod.js
  * @description:
  */
@@ -23,7 +23,7 @@ exports.redis = {
 
 exports.mongoose = {
   client: {
-    url: 'mongodb://47.98.217.142:27017/youtobe',
+    url: 'mongodb://47.98.217.142:27017/youtube',
     options: {
       useUnifiedTopology: true,
     },

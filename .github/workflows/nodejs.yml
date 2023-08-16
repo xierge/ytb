@@ -31,7 +31,7 @@ jobs:
         script: |
           export ACCESSKEYID=$ACCESSKEYID
           export ACCESSKEYSECRET=$ACCESSKEYSECRET
-          cd /usr/local/ytb/lx_ytb
+          cd /usr/local/ytb
           git pull  
           yarn
           npm run stop

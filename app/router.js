@@ -83,4 +83,8 @@ module.exports = app => {
   router.get('/ytb/v1/todo', mustLogin, controller.todo.getList);
   // 删除计划
   router.delete('/ytb/v1/todo/:id', mustLogin, controller.todo.delete);
+
+  // 透传大商创
+  router.get('/ytb/v1/dsc', controller.dsc.get);
+  // router.post('ytb/v1/dsc/post', controller.dsc.post);
 };

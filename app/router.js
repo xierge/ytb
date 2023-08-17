@@ -1,8 +1,8 @@
 /*
  * @Date: 2023-07-26 18:39:29
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2023-08-17 19:02:22
- * @FilePath: /ytb/app/router.js
+ * @LastEditTime: 2023-08-17 23:35:51
+ * @FilePath: /lx_ytb/app/router.js
  * @description:
  */
 'use strict';
@@ -29,7 +29,8 @@ module.exports = app => {
   router.put('/ytb/v1/user/:id', mustLogin, controller.user.update);
   // 删除用户
   router.delete('/ytb/v1/user/:id', controller.user.delete);
-
+  // 获取图形验证码
+  router.get('/ytb/v1/captcha', controller.user.captcha);
   // 角色相关
   // 创建 角色
   router.post('/ytb/v1/role', mustLogin, controller.role.create);

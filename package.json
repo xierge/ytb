@@ -17,7 +17,9 @@
     "egg-swagger-doc": "^2.3.2",
     "egg-validate": "^2.0.2",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "svg-captcha": "^1.4.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "autod": "^3",

@@ -169,4 +169,17 @@ module.exports = {
       description: '用户id',
     },
   },
+
+  captcha: {
+    token: {
+      type: 'string',
+      example: 'x3sg',
+      description: 'uuid token',
+    },
+    data: {
+      type: 'string',
+      example: 'svg',
+      description: '验证码',
+    },
+  },
 };

@@ -1,6 +1,14 @@
+/*
+ * @Date: 2023-03-07 22:17:47
+ * @LastEditors: Carlos 2899952565@qq.com
+ * @LastEditTime: 2023-08-17 23:55:22
+ * @FilePath: /lx_ytb/app/service/user.js
+ * @description: user相关
+ */
 const Service = require('egg').Controller;
 const jwt = require('jsonwebtoken');
-
+const { v1 } = require('uuid');
+const svgCaptcha = require('svg-captcha');
 class UserService extends Service {
   get User() {
     return this.app.model.User;
@@ -49,6 +57,12 @@ class UserService extends Service {
 
   delete(id) {
     return this.User.findByIdAndDelete(id);
+  }
+
+  async captcha() {
+    const captcha = svgCaptcha.create();
+    const token = v1();
+    return { ...captcha, token };
   }
 }
 

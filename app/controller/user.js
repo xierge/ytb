@@ -207,6 +207,20 @@ class UserController extends BaseController {
     this.setRes();
   }
 
+  /**
+   * @summary 验证码
+   * @description 验证码
+   * @Router GET /v1/captcha
+   * @Response 200 captcha ok
+   */
+  async captcha() {
+    const { token, text, data } = await this.userServive.captcha();
+    const { app } = this;
+    await app.redis.set(token, text);
+    await app.redis.expire(token, 1);
+    this.setRes({ token, data });
+  }
+
 }
 
 module.exports = UserController;

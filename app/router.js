@@ -1,3 +1,10 @@
+/*
+ * @Date: 2023-07-26 18:39:29
+ * @LastEditors: Carlos 2899952565@qq.com
+ * @LastEditTime: 2023-08-17 19:02:22
+ * @FilePath: /ytb/app/router.js
+ * @description:
+ */
 'use strict';
 /**
  * @param {Egg.Application} app - egg application
@@ -22,6 +29,19 @@ module.exports = app => {
   router.put('/ytb/v1/user/:id', mustLogin, controller.user.update);
   // 删除用户
   router.delete('/ytb/v1/user/:id', controller.user.delete);
+
+  // 角色相关
+  // 创建 角色
+  router.post('/ytb/v1/role', mustLogin, controller.role.create);
+  // 修改 角色
+  router.put('/ytb/v1/role/:id', mustLogin, controller.role.update);
+  // 列表 角色
+  router.get('/ytb/v1/role/list', mustLogin, controller.role.list);
+  // // 详情 角色
+  router.get('/ytb/v1/role/:id', mustLogin, controller.role.detail);
+  // // 删除 角色
+  router.delete('/ytb/v1/role/:id', mustLogin, controller.role.delete);
+
 
   // -----------------------订阅相关------------------------
   // 订阅用户

@@ -47,11 +47,11 @@ module.exports = appInfo => {
     expiresIn: '1d',
   };
 
-  config.redis = {
+  exports.redis = {
     client: {
       port: 6379, // Redis port
-      host: '127.0.0.1', // Redis host
-      password: 'auth',
+      host: '47.98.217.142', // Redis host
+      password: 'lpx666888',
       db: 0,
     },
   };

@@ -217,7 +217,7 @@ class UserController extends BaseController {
     const { token, text, data } = await this.userServive.captcha();
     const { app } = this;
     await app.redis.set(token, text);
-    await app.redis.expire(token, 1);
+    await app.redis.expire(token, 60);
     this.setRes({ token, data });
   }
 

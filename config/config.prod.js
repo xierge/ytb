@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-03-07 22:17:47
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2023-08-17 02:58:14
+ * @LastEditTime: 2023-08-19 12:57:37
  * @FilePath: /lx_ytb/config/config.prod.js
  * @description:
  */
@@ -25,7 +25,11 @@ exports.mongoose = {
   client: {
     url: 'mongodb://47.98.217.142:27017/youtube',
     options: {
-      useUnifiedTopology: true,
+      options: {
+        auth: { authSource: 'admin' },
+        user: 'admin',
+        pass: 'lpx666888',
+      },
     },
     // mongoose global plugins, expected a function or an array of function and options
     plugins: [],

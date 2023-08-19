@@ -28,7 +28,9 @@ module.exports = appInfo => {
     client: {
       url: 'mongodb://47.98.217.142:27017/youtube',
       options: {
-        useUnifiedTopology: true,
+        auth: { authSource: 'admin' },
+        user: 'admin',
+        pass: 'lpx666888',
       },
       // mongoose global plugins, expected a function or an array of function and options
       plugins: [],

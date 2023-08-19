@@ -37,9 +37,9 @@ class UserController extends BaseController {
     });
 
     const user = await userServive.findByUsername(body.username);
-    if (!user) return this.setErrorRes('用户不存在，请先注册', 1);
+    if (!user) ctx.throw(422, '用户不存在，请先注册');
 
-    if (user.password !== this.ctx.helper.md5(body.password)) return this.setErrorRes('密码错误');
+    if (user.password !== this.ctx.helper.md5(body.password)) ctx.throw(422, '密码错误');
     const token = await userServive.createToken({ userId: user._id });
     await app.redis.set(token, user._id);
     await app.redis.expire(token, 60 * 60 * 24);
@@ -88,11 +88,13 @@ class UserController extends BaseController {
         type: 'string',
       },
     });
-    if (await userServive.findByUsername(body.username)) { return this.setErrorRes('用户已存在'); }
+    if (await userServive.findByUsername(body.username)) {
+      ctx.throw(422, '用户已存在');
+    }
 
 
     if (await userServive.findByEmail(body.email)) {
-      return this.setErrorRes('邮箱已存在');
+      ctx.throw(422, '邮箱已存在');
     }
 
     const user = await userServive.createUser(body);
@@ -173,12 +175,12 @@ class UserController extends BaseController {
 
       if (username && username !== ctx.userInfo.username) {
         const user = await this.userServive.findByUsername(username);
-        if (user) return this.setErrorRes('username重复');
+        if (user) ctx.throw(422, 'username重复');
       }
 
       if (email && email !== ctx.email && !await this.userServive.findByEmail(email)) {
         const user = await this.userServive.findByEmail(email);
-        if (user) return this.setErrorRes('email重复');
+        if (user) ctx.throw(422, 'email重复');
       }
 
       if (password) {
@@ -203,7 +205,7 @@ class UserController extends BaseController {
     const { ctx } = this;
     const id = ctx.params.id;
     const res = await this.userServive.delete(id);
-    if (!res) return this.setErrorRes('无此用户');
+    if (!res) ctx.throw(422, '无此用户');
     this.setRes();
   }
 

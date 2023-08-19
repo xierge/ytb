@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-08-17 17:23:56
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2023-08-19 13:03:45
+ * @LastEditTime: 2023-08-19 13:20:10
  * @FilePath: /lx_ytb/app/controller/menu.js
  * @description:
  */
@@ -56,16 +56,10 @@ class MenuController extends BaseController {
    * @description 查看数据
    * @Router GET /v1/menu/list
    * @Request header string authorization token
-   * @request params number pageNum   页码
-   * @request params number pageSize  pageSize
-   * @request params string menuName 菜单名称
    */
   async list() {
     // const { userId } = this.ctx.userInfo;
-    const pageInfo = {
-      pageSize: 10, pageNum: 1,
-    };
-    const res = await this.menuService.getList({ ...pageInfo, ...this.ctx.query });
+    const res = await this.menuService.getList();
     this.setRes(res);
   }
 

@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-04-09 15:33:21
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2023-08-19 13:15:05
+ * @LastEditTime: 2023-08-19 13:22:32
  * @FilePath: /lx_ytb/app/service/menu.js
  * @description: menu
  */
@@ -18,18 +18,10 @@ class MenuService extends Service {
     return res;
   }
 
-  async getList({ pageNum, pageSize, ...query }) {
-    if (query.menuName) {
-      query.menuName = new RegExp(`${query.menuName}`);
-    }
-    const getData = this.Menu.find(query)
-      .sort({
-        order: 1,
-      })
-      .skip((pageNum - 1) * pageSize)
-      .limit(pageSize * 1);
+  async getList() {
 
-    const getCount = this.Menu.countDocuments(query);
+    const getData = this.Menu.find({});
+    const getCount = this.Menu.countDocuments({});
     const [ list, count ] = await Promise.all([ getData, getCount ]);
     return { list, count };
   }

@@ -1,15 +1,15 @@
 /*
  * @Date: 2023-08-17 17:49:09
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2023-08-17 17:52:52
- * @FilePath: /ytb/app/contract/role.js
+ * @LastEditTime: 2023-08-19 10:28:26
+ * @FilePath: /lx_ytb/app/contract/role.js
  * @description:
  */
 
 module.exports = {
-  // 创建todo任务
+  // 创建role
   CreateRole: {
-    role_name: {
+    roleName: {
       type: 'string',
       example: 'admin',
       description: '角色名称',

@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-07-26 18:39:29
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2023-08-17 23:35:51
+ * @LastEditTime: 2023-08-19 10:15:41
  * @FilePath: /lx_ytb/app/router.js
  * @description:
  */
@@ -31,7 +31,8 @@ module.exports = app => {
   router.delete('/ytb/v1/user/:id', controller.user.delete);
   // 获取图形验证码
   router.get('/ytb/v1/captcha', controller.user.captcha);
-  // 角色相关
+
+  // -----------------------角色相关------------------------
   // 创建 角色
   router.post('/ytb/v1/role', mustLogin, controller.role.create);
   // 修改 角色
@@ -43,6 +44,17 @@ module.exports = app => {
   // // 删除 角色
   router.delete('/ytb/v1/role/:id', mustLogin, controller.role.delete);
 
+  // -----------------------菜单相关------------------------
+  // 创建 菜单
+  router.post('/ytb/v1/role', mustLogin, controller.menu.create);
+  // 修改 菜单
+  router.put('/ytb/v1/role/:id', mustLogin, controller.menu.update);
+  // 列表 菜单
+  router.get('/ytb/v1/role/list', mustLogin, controller.menu.list);
+  // // 详情 菜单
+  router.get('/ytb/v1/role/:id', mustLogin, controller.menu.detail);
+  // // 删除 菜单
+  router.delete('/ytb/v1/role/:id', mustLogin, controller.menu.delete);
 
   // -----------------------订阅相关------------------------
   // 订阅用户

@@ -1,8 +1,8 @@
 /*
  * @Date: 2023-08-17 17:23:56
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2023-08-17 20:17:08
- * @FilePath: /ytb/app/controller/role.js
+ * @LastEditTime: 2023-08-19 10:17:29
+ * @FilePath: /lx_ytb/app/controller/role.js
  * @description:
  */
 /* eslint-disable jsdoc/check-tag-names */
@@ -55,7 +55,6 @@ class RoleController extends BaseController {
     const pageInfo = {
       pageSize: 10, pageNum: 1,
     };
-    console.log(pageInfo);
     const res = await this.roleService.getList({ ...pageInfo, ...this.ctx.query, state: 0 });
     this.setRes(res);
   }

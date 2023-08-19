@@ -26,7 +26,7 @@ module.exports = appInfo => {
 
   config.mongoose = {
     client: {
-      url: 'mongodb://47.98.217.142:27017/youtobe',
+      url: 'mongodb://47.98.217.142:27017/youtube',
       options: {
         useUnifiedTopology: true,
       },

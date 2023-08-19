@@ -19,8 +19,8 @@ class RoleService extends Service {
   }
 
   async getList({ pageNum, pageSize, ...query }) {
-    if (query.role_name) {
-      query.role_name = new RegExp(`${query.role_name}`);
+    if (query.roleName) {
+      query.roleName = new RegExp(`${query.roleName}`);
     }
     const getData = this.Role.find(query)
       .sort({

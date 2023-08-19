@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-04-09 15:33:21
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2023-08-19 10:36:37
+ * @LastEditTime: 2023-08-19 13:15:05
  * @FilePath: /lx_ytb/app/service/menu.js
  * @description: menu
  */
@@ -19,8 +19,8 @@ class MenuService extends Service {
   }
 
   async getList({ pageNum, pageSize, ...query }) {
-    if (query.menu_name) {
-      query.menu_name = new RegExp(`${query.menu_name}`);
+    if (query.menuName) {
+      query.menuName = new RegExp(`${query.menuName}`);
     }
     const getData = this.Menu.find(query)
       .sort({
@@ -49,7 +49,7 @@ class MenuService extends Service {
       return res;
 
     } catch (error) {
-      this.ctx.throw(422, '不存在此角色');
+      this.ctx.throw(422, '不存在此菜单');
     }
   }
 }

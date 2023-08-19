@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-08-17 17:23:56
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2023-08-19 10:39:15
+ * @LastEditTime: 2023-08-19 13:03:45
  * @FilePath: /lx_ytb/app/controller/menu.js
  * @description:
  */
@@ -29,7 +29,7 @@ class MenuController extends BaseController {
     const body = this.ctx.request.body;
     const { username } = this.ctx.userInfo;
     this.ctx.validate({
-      menu_name: {
+      menuName: {
         require: true,
         type: 'string',
       },
@@ -58,7 +58,7 @@ class MenuController extends BaseController {
    * @Request header string authorization token
    * @request params number pageNum   页码
    * @request params number pageSize  pageSize
-   * @request params string menu_name 菜单名称
+   * @request params string menuName 菜单名称
    */
   async list() {
     // const { userId } = this.ctx.userInfo;
@@ -96,7 +96,7 @@ class MenuController extends BaseController {
     const { id } = this.ctx.params;
     const body = this.ctx.request.body;
     this.ctx.validate({
-      menu_name: {
+      menuName: {
         require: true,
         type: 'string',
       },

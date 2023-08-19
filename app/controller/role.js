@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-08-17 17:23:56
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2023-08-19 10:17:29
+ * @LastEditTime: 2023-08-19 13:17:33
  * @FilePath: /lx_ytb/app/controller/role.js
  * @description:
  */
@@ -29,7 +29,7 @@ class RoleController extends BaseController {
     const body = this.ctx.request.body;
     const { username } = this.ctx.userInfo;
     this.ctx.validate({
-      role_name: {
+      roleName: {
         require: true,
         type: 'string',
       },
@@ -47,7 +47,7 @@ class RoleController extends BaseController {
    * @Request header string authorization token
    * @request params number pageNum   页码
    * @request params number pageSize  pageSize
-   * @request params string role_name 角色名称
+   * @request params string roleName 角色名称
    * @request params string id 角色id
    */
   async list() {
@@ -86,7 +86,7 @@ class RoleController extends BaseController {
     const { id } = this.ctx.params;
     const body = this.ctx.request.body;
     this.ctx.validate({
-      role_name: {
+      roleName: {
         require: true,
         type: 'string',
       },

@@ -1,8 +1,8 @@
 /*
  * @Date: 2023-04-09 15:33:21
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2023-08-19 13:22:32
- * @FilePath: /lx_ytb/app/service/menu.js
+ * @LastEditTime: 2023-09-07 11:53:09
+ * @FilePath: /ytb/app/service/menu.js
  * @description: menu
  */
 const Service = require('egg').Controller;
@@ -20,8 +20,8 @@ class MenuService extends Service {
 
   async getList() {
 
-    const getData = this.Menu.find({});
-    const getCount = this.Menu.countDocuments({});
+    const getData = this.Menu.find({ state: 0 });
+    const getCount = this.Menu.countDocuments({ state: 0 });
     const [ list, count ] = await Promise.all([ getData, getCount ]);
     return { list, count };
   }

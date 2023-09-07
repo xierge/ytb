@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-04-09 15:33:21
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2023-09-07 11:53:09
+ * @LastEditTime: 2023-09-07 11:57:55
  * @FilePath: /ytb/app/service/menu.js
  * @description: menu
  */
@@ -19,9 +19,8 @@ class MenuService extends Service {
   }
 
   async getList() {
-
-    const getData = this.Menu.find({ state: 0 });
-    const getCount = this.Menu.countDocuments({ state: 0 });
+    const getData = this.Menu.find({ status: 0 });
+    const getCount = this.Menu.countDocuments({ status: 0 });
     const [ list, count ] = await Promise.all([ getData, getCount ]);
     return { list, count };
   }

@@ -1,15 +1,21 @@
+/*
+ * @Date: 2023-03-07 22:17:47
+ * @LastEditors: Carlos 2899952565@qq.com
+ * @LastEditTime: 2025-05-30 00:34:14
+ * @FilePath: /lx_ytb/app/model/user.js
+ * @description:
+ */
 module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
 
   const UserSchema = new Schema({
     username: { type: String, required: true },
-    email: { type: String, required: true },
     password: { type: String, required: true, select: false },
-    avatar: { type: String, default: null }, // 头像
-    cover: { type: String, default: null }, // 封面
-    channelDescription: { type: String, default: null }, // 频道介绍
-    subscribeCount: { type: Number, default: 0 }, // 被订阅次数
+    role: { type: String, required: true },
+    phone: {
+      type: String, required: true,
+    },
   }, {
     timestamps: true,
   });

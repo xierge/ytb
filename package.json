@@ -34,6 +34,7 @@
     "node": ">=16.0.0"
   },
   "scripts": {
+    "start:prod": "EGG_SERVER_ENV=dev npm start",
     "start": "egg-scripts start --daemon --title=egg-server-youtube",
     "stop": "egg-scripts stop --title=egg-server-youtube",
     "dev": "egg-bin dev",

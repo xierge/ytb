@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-03-07 22:17:47
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2023-08-19 12:57:37
+ * @LastEditTime: 2025-05-30 00:07:39
  * @FilePath: /lx_ytb/config/config.prod.js
  * @description:
  */
@@ -23,7 +23,7 @@ exports.redis = {
 
 exports.mongoose = {
   client: {
-    url: 'mongodb://47.98.217.142:27017/youtube',
+    url: 'mongodb://47.98.217.142:27017/sweet',
     options: {
       options: {
         auth: { authSource: 'admin' },

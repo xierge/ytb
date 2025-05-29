@@ -3,6 +3,11 @@
 
 const BaseController = require('./base');
 
+const userLevelEnum = {
+  Boss: 'Boss',
+  Staff: 'Staff',
+};
+
 /**
  * @Controller User 用户相关接口
  */
@@ -28,7 +33,7 @@ class UserController extends BaseController {
     const body = ctx.request.body;
     const userServive = this.service.user;
     ctx.validate({
-      username: {
+      phone: {
         type: 'string',
       },
       password: {
@@ -36,7 +41,7 @@ class UserController extends BaseController {
       },
     });
 
-    const user = await userServive.findByUsername(body.username);
+    const user = await userServive.findByPhone(body.phone);
     if (!user) ctx.throw(422, '用户不存在，请先注册');
 
     if (user.password !== this.ctx.helper.md5(body.password)) ctx.throw(422, '密码错误');
@@ -44,11 +49,8 @@ class UserController extends BaseController {
     await app.redis.set(token, user._id);
     await app.redis.expire(token, 60 * 60 * 24);
     this.setRes({
-      email: user.email,
       token,
-      username: user.username,
-      channelDescription: user.channelDescription,
-      avatar: user.avatar,
+      ...user,
     }, '请求成功', 100000);
   }
 
@@ -78,28 +80,26 @@ class UserController extends BaseController {
     const userServive = this.service.user;
 
     ctx.validate({
-      username: {
+      phone: {
         type: 'string',
-      },
-      email: {
-        type: 'email',
       },
       password: {
         type: 'string',
       },
+      username: {
+        type: 'string',
+      },
     });
-    if (await userServive.findByUsername(body.username)) {
+    if (await userServive.findByPhone(body.phone)) {
       ctx.throw(422, '用户已存在');
     }
 
+    const bossList = [ '18768861867', '15290882887' ];
+    const isBoss = bossList.includes(body.phone);
 
-    if (await userServive.findByEmail(body.email)) {
-      ctx.throw(422, '邮箱已存在');
-    }
-
-    const user = await userServive.createUser(body);
+    const user = await userServive.createUser({ ...body, role: isBoss ? userLevelEnum.Boss : userLevelEnum.Staff });
     this.setRes({
-      ...this.ctx.helper._.pick(user, [ 'email', 'username', 'channelDescription', 'avatar', 'subscribeCount' ]),
+      ...this.ctx.helper._.pick(user, [ 'username', 'phone' ]),
     });
   }
 
@@ -111,34 +111,10 @@ class UserController extends BaseController {
    * @Router GET /v1/user
    * @Response 200 getUserDetailResponse ok
    */
-  async getCurrentUser() {
+  async getUserInfo() {
     const user = await this.userServive.findById(this.ctx.userInfo.userId);
     this.setRes({
-      ...this.ctx.helper._.pick(user, [ 'avatar', 'cover', 'channelDescription', 'subscribeCount', '_id', 'username', 'email', 'createdAt', 'updatedAt' ]),
-    });
-  }
-
-  /**
-   * @summary 查询用户信息
-   * @description 查询用户信息
-   * @Router GET /v1/user/{id}
-   * @Request header string authorization token
-   * @Request path string id 用户的id
-   * @Response 200 getUserDetailResponse ok
-   */
-  async getUser() {
-    let isSubscribed = false;
-    const userId = this.ctx.userInfo && this.ctx.userInfo.userId;
-    const channelId = this.ctx.params.id;
-    if (userId) {
-      const res = await this.subscribeService.find({ user: userId, channel: channelId });
-      if (res) isSubscribed = true;
-    }
-    const user = await this.userServive.findById(channelId);
-    user.isSubscribed = isSubscribed;
-    this.setRes({
-      ...this.ctx.helper._.pick(user, [ 'avatar', 'cover', 'channelDescription', 'subscribeCount', '_id', 'username', 'email', 'createdAt', 'updatedAt' ]),
-      isSubscribed,
+      ...this.ctx.helper._.pick(user, [ 'username', 'role', 'phone', '_id', 'createdAt', 'updatedAt' ]),
     });
   }
 
@@ -174,7 +150,7 @@ class UserController extends BaseController {
       const { username, password, email } = ctx.request.body;
 
       if (username && username !== ctx.userInfo.username) {
-        const user = await this.userServive.findByUsername(username);
+        const user = await this.userServive.findByPhone(username);
         if (user) ctx.throw(422, 'username重复');
       }
 

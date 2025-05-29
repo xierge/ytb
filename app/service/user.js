@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-03-07 22:17:47
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2023-08-17 23:55:22
+ * @LastEditTime: 2025-05-30 00:48:46
  * @FilePath: /lx_ytb/app/service/user.js
  * @description: user相关
  */
@@ -13,6 +13,13 @@ class UserService extends Service {
   get User() {
     return this.app.model.User;
   }
+
+  findByPhone(phone) {
+    return this.User.findOne({
+      phone,
+    }).select('+password');
+  }
+
   findByUsername(username) {
     return this.User.findOne({
       username,

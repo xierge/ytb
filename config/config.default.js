@@ -1,3 +1,10 @@
+/*
+ * @Date: 2023-08-17 23:29:51
+ * @LastEditors: Carlos 2899952565@qq.com
+ * @LastEditTime: 2025-05-30 00:07:44
+ * @FilePath: /lx_ytb/config/config.default.js
+ * @description:
+ */
 /* eslint valid-jsdoc: "off" */
 
 'use strict';
@@ -6,6 +13,7 @@
  * @param {Egg.EggAppInfo} appInfo app info
  */
 module.exports = appInfo => {
+  console.log(process.env);
   /**
    * built-in config
    * @type {Egg.EggAppConfig}
@@ -23,10 +31,9 @@ module.exports = appInfo => {
     myAppName: 'egg',
   };
 
-
   config.mongoose = {
     client: {
-      url: 'mongodb://47.98.217.142:27017/youtube',
+      url: 'mongodb://47.98.217.142:27017/sweet',
       options: {
         auth: { authSource: 'admin' },
         user: 'admin',
@@ -61,11 +68,7 @@ module.exports = appInfo => {
   config.multipart = {
     mode: 'file',
     fileSize: '50mb',
-    fileExtensions: [
-      '.foo',
-      '.apk',
-      '.mov',
-    ],
+    fileExtensions: [ '.foo', '.apk', '.mov' ],
   };
 
   config.swaggerdoc = {
@@ -95,7 +98,6 @@ module.exports = appInfo => {
   config.cors = {
     origin: '*',
   };
-
 
   return {
     ...config,

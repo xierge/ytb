@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-03-07 22:17:47
- * @LastEditors: 李鹏玺 2899952565@qq.com
- * @LastEditTime: 2023-06-10 22:28:41
+ * @LastEditors: Carlos 2899952565@qq.com
+ * @LastEditTime: 2025-05-30 22:02:13
  * @FilePath: /lx_ytb/app/controller/base.js
  * @description:
  */
@@ -29,11 +29,13 @@ class BaseController extends Controller {
       data,
       message: '请求成功',
       timestamp: Date.now(),
+      success: true,
     };
   }
 
   setErrorRes(message) {
     this.ctx.body = {
+      success: false,
       code: 1,
       message,
     };

@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-03-07 22:17:47
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2023-08-19 10:46:17
+ * @LastEditTime: 2025-05-30 22:00:44
  * @FilePath: /lx_ytb/app/middleware/error_handler.js
  * @description:
  */
@@ -11,7 +11,6 @@ module.exports = () => {
       await next();
     } catch (err) {
       ctx.app.emit('error', err, ctx);
-
       const status = err.status || 500;
 
       const error = status === 500 && ctx.app.config.env === 'prod' ? 'Internal Server Error' : err.message;

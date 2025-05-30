@@ -38,6 +38,7 @@ module.exports = appInfo => {
         auth: { authSource: 'admin' },
         user: 'admin',
         pass: 'lpx666888',
+        useUnifiedTopology:true
       },
       // mongoose global plugins, expected a function or an array of function and options
       plugins: [],

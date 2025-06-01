@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-03-07 22:17:47
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2025-05-30 22:00:44
+ * @LastEditTime: 2025-06-01 21:44:04
  * @FilePath: /lx_ytb/app/middleware/error_handler.js
  * @description:
  */
@@ -15,13 +15,11 @@ module.exports = () => {
 
       const error = status === 500 && ctx.app.config.env === 'prod' ? 'Internal Server Error' : err.message;
 
-
       if (err.errors) {
-        ctx.body = { error: err.errors };
+        ctx.body = { error: err.errors, status, success: false };
       } else {
-        ctx.body = { error };
+        ctx.body = { error, status, success: false };
       }
-      ctx.body.code = 1;
 
       if (status !== 500 && !err.errors) {
         ctx.status = 200;

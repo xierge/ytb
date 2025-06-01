@@ -16,11 +16,6 @@ class UserController extends BaseController {
     return this.service.user;
   }
 
-  get subscribeService() {
-    return this.service.subscribe;
-  }
-
-
   /**
    * @summary 用户登录
    * @description 用户登录

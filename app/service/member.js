@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-03-07 22:17:47
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2025-06-01 22:28:06
+ * @LastEditTime: 2025-06-03 00:58:12
  * @FilePath: /lx_ytb/app/service/member.js
  * @description: user相关
  */
@@ -61,8 +61,9 @@ class MemberService extends Service {
     }).select('+password');
   }
 
+
   findById(id) {
-    return this.Member.findById(id).select('+password');
+    return this.Member.findById(id);
   }
 
 

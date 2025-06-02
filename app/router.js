@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-07-26 18:39:29
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2025-06-02 22:16:35
+ * @LastEditTime: 2025-06-03 00:50:15
  * @FilePath: /lx_ytb/app/router.js
  * @description:
  */
@@ -42,12 +42,11 @@ module.exports = app => {
   // --------------------开卡相关-----------------------
   // 开卡后台管理相关
   router.post('/sweet/purchaseCard/tob/create', mustLogin, controller.purchaseCard.create);
-
-
-  // 开卡c端相关
-
-
   // 开卡双端通用接口
   router.get('/sweet/purchaseCard/list', controller.purchaseCard.list);
+
+  // 购买卡
+  router.post('/sweet/card/buy', mustLogin, controller.card.buy);
+
 
 };

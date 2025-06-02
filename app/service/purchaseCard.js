@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-04-09 15:33:21
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2025-06-02 22:16:52
+ * @LastEditTime: 2025-06-03 01:09:32
  * @FilePath: /lx_ytb/app/service/purchaseCard.js
  * @description: purchaseCard
  */
@@ -12,7 +12,7 @@ class PurchaseCardService extends Service {
     return this.app.model.PurchaseCard;
   }
 
-  // 创建开卡选项
+  // 创建开卡选项 toC
   async create(data) {
     const purchaseCard = new this.PurchaseCard(data);
     const res = await purchaseCard.save();
@@ -25,6 +25,12 @@ class PurchaseCardService extends Service {
     const [ list, count ] = await Promise.all([ getData, getCount ]);
     return { list, count };
   }
+
+
+  findById(id) {
+    return this.PurchaseCard.findById(id);
+  }
+
 
   async update(id, data) {
     await this.findById(id);

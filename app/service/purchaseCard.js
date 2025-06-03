@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-04-09 15:33:21
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2025-06-03 01:09:32
+ * @LastEditTime: 2025-06-03 22:34:24
  * @FilePath: /lx_ytb/app/service/purchaseCard.js
  * @description: purchaseCard
  */
@@ -12,7 +12,7 @@ class PurchaseCardService extends Service {
     return this.app.model.PurchaseCard;
   }
 
-  // 创建开卡选项 toC
+  // 创建开卡选项 tob
   async create(data) {
     const purchaseCard = new this.PurchaseCard(data);
     const res = await purchaseCard.save();

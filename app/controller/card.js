@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-08-17 17:23:56
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2025-06-03 01:13:48
+ * @LastEditTime: 2025-06-03 22:36:17
  * @FilePath: /lx_ytb/app/controller/card.js
  * @description:
  */
@@ -22,6 +22,9 @@ class PurchaseCardController extends BaseController {
     return this.service.member;
   }
 
+  get cardService() {
+    return this.service.card;
+  }
   /**
    * @summary 创建开卡内容
    * @description 创建开卡内容
@@ -51,21 +54,29 @@ class PurchaseCardController extends BaseController {
       coupon,
     } = await this.purchaseCardService.findById(purchaseCardId);
 
-    // 购买卡数据库留存数据
 
     // 更新会员信息卡余额次数等字段
-
     const res = await this.memberService.update(memberInfo._id, {
-      cardAmount,
-      giftAmount,
-      allAmount,
-      solidCard,
-      catEyes,
-      artBuilding,
-      upgradeNail,
-      nailOrEye,
-      coupon,
+      cardAmount: cardAmount + memberInfo.cardAmount,
+      giftAmount: giftAmount + memberInfo.giftAmount,
+      allAmount: allAmount + memberInfo.allAmount,
+      solidCard: solidCard + memberInfo.solidCard,
+      catEyes: catEyes + memberInfo.catEyes,
+      artBuilding: artBuilding + memberInfo.artBuilding,
+      upgradeNail: upgradeNail + memberInfo.upgradeNail,
+      nailOrEye: nailOrEye + memberInfo.nailOrEye,
+      coupon: coupon + memberInfo.coupon,
+
     });
+
+    // 购买卡数据库留存数据
+    await this.cardService.create({
+      ...body,
+      operator: username,
+      allAmount: allAmount + memberInfo.allAmount,
+      status: 1,
+    });
+
     this.setRes(res);
   }
 

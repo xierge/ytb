@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-08-17 23:29:51
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2025-05-30 00:07:44
+ * @LastEditTime: 2025-06-03 22:46:19
  * @FilePath: /lx_ytb/config/config.default.js
  * @description:
  */
@@ -38,7 +38,7 @@ module.exports = appInfo => {
         auth: { authSource: 'admin' },
         user: 'admin',
         pass: 'lpx666888',
-        useUnifiedTopology:true
+        useUnifiedTopology: true,
       },
       // mongoose global plugins, expected a function or an array of function and options
       plugins: [],
@@ -54,7 +54,7 @@ module.exports = appInfo => {
 
   config.jwt = {
     secret: 'd4638f9e-af3c-456b-bd26-ab13e54f41c8',
-    expiresIn: '1d',
+    expiresIn: '1000d',
   };
 
   exports.redis = {

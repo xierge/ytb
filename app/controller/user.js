@@ -42,7 +42,7 @@ class UserController extends BaseController {
     if (user.password !== this.ctx.helper.md5(body.password)) ctx.throw(422, '密码错误');
     const token = await userServive.createToken({ userId: user._id });
     await app.redis.set(token, user._id);
-    await app.redis.expire(token, 60 * 60 * 24);
+    await app.redis.expire(token, 60 * 60 * 24 * 10000);
     this.setRes({
       token,
       ...user,

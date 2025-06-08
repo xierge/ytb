@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-08-17 17:23:56
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2025-06-03 00:49:54
+ * @LastEditTime: 2025-06-07 17:35:16
  * @FilePath: /lx_ytb/app/controller/purchaseCard.js
  * @description:
  */
@@ -46,7 +46,6 @@ class PurchaseCardController extends BaseController {
     this.setRes(res);
   }
 
-  
 
 }
 

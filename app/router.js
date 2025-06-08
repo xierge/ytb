@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-07-26 18:39:29
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2025-06-03 00:50:15
+ * @LastEditTime: 2025-06-08 17:27:12
  * @FilePath: /lx_ytb/app/router.js
  * @description:
  */
@@ -47,6 +47,13 @@ module.exports = app => {
 
   // 购买卡
   router.post('/sweet/card/buy', mustLogin, controller.card.buy);
+
+
+  // --------------------开单相关-----------------------
+  // 新增商品
+  router.post('/sweet/goods/create', controller.goods.create);
+  // 商品列表
+  router.get('/sweet/goods/list', controller.goods.list);
 
 
 };

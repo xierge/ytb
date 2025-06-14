@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-07-26 18:39:29
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2025-06-08 17:27:12
+ * @LastEditTime: 2025-06-15 00:43:26
  * @FilePath: /lx_ytb/app/router.js
  * @description:
  */
@@ -54,6 +54,9 @@ module.exports = app => {
   router.post('/sweet/goods/create', controller.goods.create);
   // 商品列表
   router.get('/sweet/goods/list', controller.goods.list);
+
+  // 开单
+  router.post('/sweet/order/create', controller.order.create);
 
 
 };

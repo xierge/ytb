@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-04-09 15:33:21
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2025-06-07 17:37:21
+ * @LastEditTime: 2025-06-21 11:59:49
  * @FilePath: /lx_ytb/app/service/goods.js
  * @description: goods
  */
@@ -20,11 +20,13 @@ class GoodsService extends Service {
   }
 
 
+  // 获取商品列表
   async getList() {
-    const getData = this.Goods.find();
-    const getCount = this.Goods.countDocuments();
-    const [ list, count ] = await Promise.all([ getData, getCount ]);
-    return { list, count };
+    const getData = this.Goods.find().sort({
+      order: 1,
+    });
+    const list = await getData;
+    return { list };
   }
 
 

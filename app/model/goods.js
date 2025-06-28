@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-08-17 17:24:50
  * @LastEditors: Carlos 2899952565@qq.com
- * @LastEditTime: 2025-06-21 11:34:10
+ * @LastEditTime: 2025-06-28 16:58:24
  * @FilePath: /lx_ytb/app/model/goods.js
  * @description: menu 表
  */
@@ -23,6 +23,10 @@ module.exports = app => {
     },
     memberPrice: { // 价格
       type: Number, default: 0,
+    },
+    isCoupon: {
+      type: Boolean,
+      default: false,
     },
   }, {
     timestamps: true,
